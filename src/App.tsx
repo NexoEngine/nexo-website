@@ -5,21 +5,70 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { AuthProvider } from "./hooks/useAuth";
+import ProtectedRoute from "./components/ProtectedRoute";
+import BlogListPage from "./pages/BlogListPage";
+import BlogPostPage from "./pages/BlogPostPage";
+import NewPostPage from "./pages/admin/NewPostPage";
+import EditPostPage from "./pages/admin/EditPostPage";
+import AdminPage from "./pages/admin/AdminPage";
+
+// Placeholder imports for new pages (will be created later)
+// const BlogListPage = () => <div>Blog List Page Placeholder</div>;
+// const BlogPostPage = () => <div>Blog Post Page Placeholder</div>;
+// const AdminPage = () => <div>Admin Dashboard Placeholder</div>;
+// const NewPostPage = () => <div>New Post Page Placeholder</div>;
+// const EditPostPage = () => <div>Edit Post Page Placeholder</div>;
+// Placeholder for ProtectedRoute (will be created later)
+// const ProtectedRoute = ({ children }) => children;
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+
+            {/* Blog Routes */}
+            <Route path="/blog" element={<BlogListPage />} />
+            <Route path="/blog/:postId" element={<BlogPostPage />} />
+
+            {/* Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/blog/new"
+              element={
+                <ProtectedRoute>
+                  <NewPostPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/blog/edit/:postId"
+              element={
+                <ProtectedRoute>
+                  <EditPostPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

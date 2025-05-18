@@ -2,16 +2,18 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { AuthProvider } from "./hooks/useAuth";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BlogListPage from "./pages/BlogListPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import CreatePostPage from "./pages/CreatePostPage";
 import NewPostPage from "./pages/admin/NewPostPage";
 import EditPostPage from "./pages/admin/EditPostPage";
 import AdminPage from "./pages/admin/AdminPage";
+import AuthPage from "@/pages/AuthPage";
 
 // Placeholder imports for new pages (will be created later)
 // const BlogListPage = () => <div>Blog List Page Placeholder</div>;
@@ -37,6 +39,14 @@ const App = () => (
             {/* Blog Routes */}
             <Route path="/blog" element={<BlogListPage />} />
             <Route path="/blog/:postId" element={<BlogPostPage />} />
+            <Route 
+              path="/blog/create" 
+              element={ 
+                <ProtectedRoute>
+                  <CreatePostPage />
+                </ProtectedRoute>
+              }
+            />
 
             {/* Admin Routes */}
             <Route
@@ -63,6 +73,9 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
+
+            {/* Auth Routes */}
+            <Route path="/auth" element={<AuthPage />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

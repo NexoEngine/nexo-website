@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc, Timestamp } from 'firebase/firestore'; // Import Timestamp
-import { db } from '@/lib/firebase';
+// import { doc, getDoc, Timestamp as FirebaseTimestamp } from 'firebase/firestore'; // Import Timestamp
+// import { db } from '@/lib/firebase';
+import { supabase } from '@/lib/supabase'; // Import Supabase client
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton"; // For loading state
-import CommentsSection from "@/components/CommentsSection"; // Import CommentsSection
+import { Skeleton } from "@/components/ui/skeleton";
+import CommentsSection from "@/components/CommentsSection";
+import { Post } from '@/types'; // Import the Post interface
 
-// Reusing the Post interface (consider moving to a shared types file)
+// Remove the local Post interface, as it's now imported
+/*
 interface Post {
   id: string;
   title: string;
   content: string;
   tags?: string[];
-  publishedAt: Timestamp; // Use Firestore Timestamp type
+  publishedAt: FirebaseTimestamp; // Use Firestore Timestamp type
   status: string;
-  // Add other relevant fields
 }
+*/
 
 const BlogPostPage = () => {
   const { postId } = useParams<{ postId: string }>();
@@ -37,30 +40,32 @@ const BlogPostPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const postDocRef = doc(db, 'posts', postId);
-        const docSnap = await getDoc(postDocRef);
+        // Fetch post from Supabase
+        const { data: fetchedPost, error: supabaseError } = await supabase
+          .from('posts')
+          .select('*') // Select all columns or specify needed ones
+          .eq('id', postId)
+          .eq('status', 'published') // Ensure only published posts are fetched by ID directly
+          .single(); // Expect a single record
 
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          // Basic check if post is published (or maybe allow admins to see drafts?)
-          if (data.status !== 'published') {
-             setError('This post is not published.');
-          } else {
-            setPost({
-              id: docSnap.id,
-              title: data.title,
-              content: data.content,
-              tags: data.tags || [],
-              publishedAt: data.publishedAt as Timestamp, // Cast to Timestamp
-              status: data.status,
-            });
-          }
-        } else {
-          setError('Post not found.');
+        if (supabaseError && supabaseError.code !== 'PGRST116') { // PGRST116: Row to be converted not found (0 rows)
+          throw supabaseError;
         }
-      } catch (err) {
+
+        if (fetchedPost) {
+          setPost(fetchedPost as Post); // Cast if necessary
+        } else {
+          setError('Post not found or not published.');
+        }
+      } catch (err: unknown) {
         console.error("Error fetching post:", err);
-        setError('Failed to load the blog post.');
+        if (err instanceof Error) {
+            setError(err.message);
+        } else if (typeof err === 'string') {
+            setError(err);
+        } else {
+            setError('Failed to load the blog post. An unknown error occurred.');
+        }
       }
       setLoading(false);
     };
@@ -90,7 +95,7 @@ const BlogPostPage = () => {
             <article className="prose prose-invert lg:prose-xl max-w-none prose-headings:text-nexo-white prose-a:text-nexo-blue hover:prose-a:text-nexo-blue/80 prose-strong:text-nexo-white prose-code:text-nexo-blue prose-code:bg-nexo-darkBlue/50 prose-code:p-1 prose-code:rounded prose-blockquote:border-nexo-blue prose-blockquote:text-muted-foreground">
               <h1>{post.title}</h1>
               <div className="mb-4 text-sm text-muted-foreground">
-                Published on {post.publishedAt?.toDate().toLocaleDateString()}
+                Published on {post.published_at ? new Date(post.published_at).toLocaleDateString() : 'Date not available'}
               </div>
               <div className="flex flex-wrap gap-2 mb-6">
                 {post.tags?.map(tag => (
@@ -105,7 +110,7 @@ const BlogPostPage = () => {
           
           {/* Comments Section (Phase 5) */}
           {!loading && !error && post && postId && (
-              <CommentsSection postId={postId} /> // Render CommentsSection
+              <CommentsSection postId={postId} />
           )}
         </div>
       </main>

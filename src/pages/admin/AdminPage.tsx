@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+// import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
+// import { db } from '@/lib/firebase';
+import { supabase } from '@/lib/supabase'; // Import Supabase client
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -20,19 +21,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Post as SharedPost } from '@/types'; // Import shared Post type
 
-// Reuse Post interface (or define specifically for admin view)
-interface Post {
-  id: string;
-  title: string;
-  status: 'draft' | 'published';
-  createdAt: any; // Firestore timestamp
-  updatedAt: any; // Firestore timestamp
-  // Add other fields like authorName if needed
+// Define an interface for posts in the admin view, extending or using SharedPost
+// Supabase returns ISO strings for timestamps (e.g., created_at, updated_at, published_at)
+interface AdminPost extends Omit<SharedPost, 'content' | 'tags' | 'author_id' | 'published_at'> {
+  // id, title, status are from SharedPost
+  created_at: string; 
+  updated_at: string;
+  // published_at?: string | null; // Already in SharedPost, optional here if not always shown
+  // We might not need full content or tags for the admin list view.
 }
 
 const AdminPage = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<AdminPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -41,26 +43,19 @@ const AdminPage = () => {
     setLoading(true);
     setError(null);
     try {
-      const postsRef = collection(db, 'posts');
-      // Order by creation date, newest first
-      const q = query(postsRef, orderBy('createdAt', 'desc'));
-      const querySnapshot = await getDocs(q);
-      const fetchedPosts: Post[] = [];
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        fetchedPosts.push({
-          id: doc.id,
-          title: data.title,
-          status: data.status,
-          createdAt: data.createdAt,
-          updatedAt: data.updatedAt,
-          // authorName: data.authorName,
-        });
-      });
-      setPosts(fetchedPosts);
-    } catch (err) {
+      // Fetch all posts from Supabase, ordered by creation date
+      const { data: fetchedPosts, error: supabaseError } = await supabase
+        .from('posts')
+        .select('id, title, status, created_at, updated_at') // Select specific columns for admin view
+        .order('created_at', { ascending: false });
+
+      if (supabaseError) {
+        throw supabaseError;
+      }
+      setPosts(fetchedPosts || []);
+    } catch (err: any) {
       console.error("Error fetching posts for admin:", err);
-      setError('Failed to load posts.');
+      setError(err.message || 'Failed to load posts.');
       toast({ title: "Error", description: "Failed to load posts.", variant: "destructive" });
     } finally {
       setLoading(false);
@@ -74,12 +69,18 @@ const AdminPage = () => {
   const handleDeletePost = async (postId: string) => {
     setDeletingId(postId);
     try {
-      const postDocRef = doc(db, 'posts', postId);
-      await deleteDoc(postDocRef);
+      const { error: deleteError } = await supabase
+        .from('posts')
+        .delete()
+        .eq('id', postId);
+
+      if (deleteError) {
+        throw deleteError;
+      }
+      
       toast({ title: "Success", description: "Post deleted successfully." });
-      // Refresh the post list after deletion
-      setPosts(posts.filter(p => p.id !== postId));
-    } catch (err) {
+      setPosts(prevPosts => prevPosts.filter(p => p.id !== postId));
+    } catch (err: any) {
       console.error("Error deleting post:", err);
       toast({ title: "Error", description: "Failed to delete post.", variant: "destructive" });
     } finally {
@@ -135,8 +136,9 @@ const AdminPage = () => {
                             {post.status}
                           </Badge>
                         </TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{post.createdAt?.toDate().toLocaleDateString()}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{post.updatedAt?.toDate().toLocaleDateString()}</TableCell>
+                        {/* Format date strings from Supabase */}
+                        <TableCell className="text-muted-foreground text-sm">{post.created_at ? new Date(post.created_at).toLocaleDateString() : 'N/A'}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{post.updated_at ? new Date(post.updated_at).toLocaleDateString() : 'N/A'}</TableCell>
                         <TableCell className="text-right space-x-2">
                           <Button variant="ghost" size="sm" asChild className="text-nexo-blue hover:bg-nexo-blue/10 hover:text-nexo-blue">
                             <Link to={`/admin/blog/edit/${post.id}`}>
@@ -146,7 +148,7 @@ const AdminPage = () => {
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <Button variant="ghost" size="sm" disabled={deletingId === post.id} className="text-red-500 hover:bg-red-500/10 hover:text-red-500">
-                                {deletingId === post.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+                                {deletingId === post.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />} 
                               </Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent className="bg-nexo-darkBlue border-nexo-blue/30 text-nexo-white">

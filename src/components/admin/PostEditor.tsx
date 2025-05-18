@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast"; // Or Sonner if preferred
 import { Loader2 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // Define the shape of the form data
 const postSchema = z.object({
@@ -33,6 +35,7 @@ const PostEditor: React.FC<PostEditorProps> = ({ initialData, onSubmit, isSubmit
     setValue,
     formState: { errors },
     reset,
+    control,
   } = useForm<PostFormData>({
     resolver: zodResolver(postSchema),
     defaultValues: {
@@ -53,10 +56,9 @@ const PostEditor: React.FC<PostEditorProps> = ({ initialData, onSubmit, isSubmit
     });
   }, [initialData, reset]);
 
+  const watchedContent = useWatch({ control, name: 'content' });
+
   const handleFormSubmit: SubmitHandler<PostFormData> = async (data) => {
-    // The status will be set by the button clicked
-    // This handler might not be directly used if buttons trigger onSubmit directly
-    console.log("Form submitted with data:", data);
   };
 
   const triggerSubmit = async (status: 'draft' | 'published') => {
@@ -65,10 +67,6 @@ const PostEditor: React.FC<PostEditorProps> = ({ initialData, onSubmit, isSubmit
     
     handleSubmit(async (data) => {
       await onSubmit(data, status);
-      // Optionally reset form after successful submission
-      // if (!initialData?.id) { // Only reset fully on create, not edit
-      //   reset(); 
-      // }
     })(); // Immediately invoke the handler returned by handleSubmit
   };
 
@@ -115,6 +113,21 @@ const PostEditor: React.FC<PostEditorProps> = ({ initialData, onSubmit, isSubmit
             />
             {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
           </div>
+
+          {/* Live Markdown Preview */}
+          <div className="space-y-2">
+            <Label>Live Preview</Label>
+            <div className="prose prose-invert prose-sm max-w-none p-4 border border-dashed border-nexo-blue/30 rounded-md bg-nexo-darkBlue/20 min-h-[100px]">
+              {watchedContent ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {watchedContent}
+                </ReactMarkdown>
+              ) : (
+                <p className="text-xs text-muted-foreground italic">Start typing content to see a preview...</p>
+              )}
+            </div>
+          </div>
+
         </CardContent>
         <CardFooter className="flex justify-end gap-4">
           <Button

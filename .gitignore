@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 \@memory-bank/
+
+.env

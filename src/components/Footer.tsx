@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Github, Twitter, Heart } from 'lucide-react';
 
@@ -24,7 +23,7 @@ const Footer = () => {
 
   const socialLinks = [
     { name: 'GitHub', href: 'https://github.com/NexoEngine', icon: Github },
-    { name: 'Twitter', href: 'https://twitter.com', icon: Twitter }, // Replace with actual Twitter URL when available
+    { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
   ];
 
   return (
@@ -38,7 +37,7 @@ const Footer = () => {
             <div className="flex items-center">
               <img
                 className="h-10 w-auto"
-                src="https://raw.githubusercontent.com/NexoEngine/assets/main/Logo/LogoColor.png"
+                src="https://raw.githubusercontent.com/NexoEngine/assets/refs/heads/main/logo_nexo.png"
                 alt="NEXO Logo"
               />
               <span className="ml-3 text-xl font-bold">NEXO</span>
@@ -123,9 +122,6 @@ const Footer = () => {
           <p className="text-xs text-muted-foreground text-center md:text-left">
             &copy; {currentYear} NEXO Engine. All rights reserved. MIT License.
           </p>
-          {/* <p className="text-xs text-muted-foreground mt-2 md:mt-0 flex items-center">
-            Made with <Heart className="h-3 w-3 mx-1 text-red-500" /> by the open-source community
-          </p> */}
         </div>
       </div>
     </footer>

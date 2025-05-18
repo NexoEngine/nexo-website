@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Download, List, Headset } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -35,7 +34,6 @@ const DownloadButton = ({ variant = 'primary', showAllReleases = false, classNam
         }
         const releases = await response.json();
         
-        // Filter out prerelease/draft versions if needed
         const validReleases = releases.filter((release: Release) => !release.prerelease);
         
         if (validReleases.length > 0) {
@@ -56,7 +54,6 @@ const DownloadButton = ({ variant = 'primary', showAllReleases = false, classNam
 
   const handleDownload = () => {
     if (latestRelease && latestRelease.assets.length > 0) {
-      // Find the most appropriate asset to download
       const mainAsset = latestRelease.assets.find(asset => asset.name.includes('nexo') && !asset.name.includes('debug'));
 
       if (mainAsset) {

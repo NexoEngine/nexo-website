@@ -1,0 +1,86 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .nexo-container {
+    @apply container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .nexo-btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .nexo-btn-primary {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none bg-nexo-blue text-white hover:bg-nexo-blue/90;
+  }
+
+  .nexo-btn-secondary {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none bg-gray-600 hover:bg-gray-500 text-white;
+  }
+
+  .nexo-btn-outline {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none border border-nexo-gray/30 bg-transparent backdrop-blur-sm hover:bg-nexo-blue/10 hover:text-nexo-blue hover:border-nexo-blue/50;
+  }
+
+  .nexo-gradient-text {
+    @apply bg-gradient-to-br from-white via-white to-nexo-gray/80 bg-clip-text text-transparent;
+  }
+
+  .chrome-gradient-text {
+    @apply bg-gradient-to-br from-nexo-chrome via-nexo-chrome to-nexo-chromeGray bg-clip-text text-transparent;
+  }
+
+  .nexo-card {
+    @apply rounded-lg border border-nexo-darkBlue/50 bg-nexo-darkBlue/50 p-6 backdrop-blur-sm transition-all hover:border-nexo-blue/30 hover:bg-nexo-darkBlue/80;
+  }
+  
+  /* Chrome themed classes */
+  .chrome-card {
+    @apply rounded-lg border border-nexo-chromeGray/20 bg-nexo-chromeDark/70 p-6 backdrop-blur-sm 
+           transition-all hover:border-nexo-chrome/20 hover:bg-nexo-chromeDark/90 
+           shadow-lg;
+  }
+  
+  .chrome-btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
+           transition-colors focus-visible:outline-none 
+           disabled:opacity-50 disabled:pointer-events-none
+           bg-gradient-to-b from-nexo-chrome to-nexo-chromeGray hover:from-white hover:to-nexo-chrome
+           text-nexo-black border border-nexo-chromeMetal/30;
+  }
+
+  .chrome-surface {
+    @apply bg-gradient-to-b from-nexo-chromeDark/40 to-nexo-chromeDark/60 border border-nexo-chromeGray/20 backdrop-blur-sm;
+  }
+
+  .chrome-border {
+    @apply border border-nexo-chromeGray/30;
+  }
+
+  .vr-highlight {
+    @apply rounded-full bg-nexo-blue/10 border border-nexo-blue/30 backdrop-blur-sm;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #171D2E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2563ff;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 99, 255, 0.8);
+}

@@ -94,12 +94,19 @@ const BlogPostPage = () => {
           language={match[1]}
           PreTag="div"
           customStyle={{
-            backgroundColor: 'rgba(21, 29, 60, 0.5)', // nexo-darkBlue/50
+            backgroundColor: '#1e1e1e !important', // VS Code dark background
             borderRadius: '0.5rem',
             padding: '1.25rem',
             fontSize: '0.875rem',
             marginTop: '1.5rem',
             marginBottom: '1.5rem',
+            border: '1px solid rgba(125, 55, 198, 0.2)', // nexo-purple border
+          }}
+          codeTagProps={{
+            style: {
+              color: 'inherit',
+              backgroundColor: 'transparent',
+            }
           }}
           {...props}
         >
@@ -171,7 +178,7 @@ const BlogPostPage = () => {
           {error && <div className="text-center text-red-500 bg-red-900/30 p-4 rounded-md">{error}</div>}
 
           {!loading && !error && post && (
-            <article className="prose prose-invert lg:prose-xl max-w-none prose-headings:text-nexo-white prose-a:text-nexo-blue hover:prose-a:text-nexo-blue/80 prose-strong:text-nexo-white prose-code:text-nexo-blue prose-code:bg-nexo-darkBlue/50 prose-code:p-1 prose-code:rounded prose-blockquote:border-nexo-blue prose-blockquote:text-muted-foreground">
+            <article className="prose prose-invert lg:prose-xl max-w-none prose-headings:text-nexo-white prose-a:text-nexo-blue hover:prose-a:text-nexo-blue/80 prose-strong:text-nexo-white prose-blockquote:border-nexo-blue prose-blockquote:text-muted-foreground">
               <h1>{post.title}</h1>
               <div className="mb-4 text-sm text-muted-foreground">
                 Published on {post.published_at ? new Date(post.published_at).toLocaleDateString() : 'Date not available'}

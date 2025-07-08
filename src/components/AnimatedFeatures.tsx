@@ -121,24 +121,37 @@ const AnimatedFeatures = () => {
         const icon = card.querySelector('.feature-icon');
         const iconBg = card.querySelector('.feature-icon-bg');
         
+        // Subtle icon rotation
         gsap.to(icon, {
           rotation: 360,
-          duration: 20 + index * 2,
+          duration: 30 + index * 3,
           ease: 'none',
           repeat: -1,
         });
 
-        card.addEventListener('mouseenter', () => {
+        // Enhanced hover effects with 3D transform
+        card.addEventListener('mouseenter', (e) => {
           gsap.to(card, {
-            scale: 1.05,
-            y: -10,
-            duration: 0.3,
+            scale: 1.02,
+            y: -8,
+            rotationX: -5,
+            rotationY: 5,
+            duration: 0.4,
             ease: 'power2.out',
+            transformPerspective: 1000,
           });
           
           gsap.to(iconBg, {
-            scale: 1.2,
-            duration: 0.3,
+            scale: 1.15,
+            rotation: 15,
+            duration: 0.4,
+            ease: 'power2.out',
+          });
+          
+          // Add glow effect to card
+          gsap.to(card.querySelector('.relative'), {
+            boxShadow: '0 20px 40px -15px rgba(8, 139, 216, 0.3)',
+            duration: 0.4,
             ease: 'power2.out',
           });
         });
@@ -147,14 +160,43 @@ const AnimatedFeatures = () => {
           gsap.to(card, {
             scale: 1,
             y: 0,
-            duration: 0.3,
+            rotationX: 0,
+            rotationY: 0,
+            duration: 0.4,
             ease: 'power2.out',
           });
           
           gsap.to(iconBg, {
             scale: 1,
+            rotation: 0,
+            duration: 0.4,
+            ease: 'power2.out',
+          });
+          
+          gsap.to(card.querySelector('.relative'), {
+            boxShadow: 'none',
+            duration: 0.4,
+            ease: 'power2.out',
+          });
+        });
+        
+        // Add mouse move effect for 3D tilt
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+          
+          gsap.to(card, {
+            rotationX: rotateX,
+            rotationY: rotateY,
             duration: 0.3,
             ease: 'power2.out',
+            transformPerspective: 1000,
           });
         });
       });
@@ -176,17 +218,40 @@ const AnimatedFeatures = () => {
   }, []);
 
   return (
-    <div ref={containerRef} id="features" className="nexo-section-gradient-1 py-16 sm:py-24 relative overflow-hidden border-t-2 border-white/20">
-      <div className="absolute inset-0 bg-gradient-to-b from-nexo-blue/5 to-transparent parallax-element" />
-      <div className="absolute top-20 left-10 w-32 h-32 bg-nexo-blue/10 rounded-full blur-3xl parallax-element" />
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-nexo-blue/10 rounded-full blur-3xl parallax-element" />
+    <div ref={containerRef} id="features" className="relative overflow-hidden py-24 sm:py-32">
+      {/* Enhanced gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-nexo-violet via-nexo-purple/50 to-nexo-darkBlue" />
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      
+      {/* Animated gradient mesh */}
+      <div className="absolute inset-0 bg-nexo-gradient-mesh opacity-20 animate-pulse" />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-nexo-blue/20 rounded-full blur-3xl animate-float parallax-element" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-nexo-teal/20 rounded-full blur-3xl animate-float parallax-element" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-nexo-magenta/10 rounded-full blur-3xl parallax-element" />
+      
+      {/* Floating orbs */}
+      <div className="absolute top-20 right-10 w-20 h-20 bg-gradient-to-br from-nexo-blue to-nexo-teal rounded-full opacity-60 animate-float" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-40 left-20 w-16 h-16 bg-gradient-to-br from-nexo-magenta to-nexo-purple rounded-full opacity-60 animate-float" style={{ animationDelay: '3s' }} />
       
       <div className="nexo-container relative">
-        <div className="text-center mx-auto max-w-2xl mb-16">
-          <h2 ref={titleRef} className="text-3xl font-bold tracking-tight nexo-gradient-text sm:text-4xl">
-            Powerful capabilities, simple workflow
-          </h2>
-          <p ref={subtitleRef} className="mt-4 text-lg text-muted-foreground">
+        <div className="text-center mx-auto max-w-3xl mb-20">
+          <div className="relative inline-block">
+            <h2 ref={titleRef} className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+              <span className="relative">
+                <span className="absolute inset-0 bg-gradient-to-r from-nexo-blue via-nexo-teal to-nexo-magenta opacity-100 blur-lg animate-pulse"></span>
+                <span className="relative bg-gradient-to-r from-white via-nexo-blue to-white bg-clip-text text-transparent animate-gradient bg-300% bg-gradient-x">
+                  Powerful capabilities
+                </span>
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-nexo-purple via-nexo-magenta to-nexo-teal bg-clip-text text-transparent">
+                simple workflow
+              </span>
+            </h2>
+          </div>
+          <p ref={subtitleRef} className="mt-6 text-xl text-gray-300 max-w-2xl mx-auto">
             Everything you need to build your next game, with the workflow you'll love.
           </p>
         </div>
@@ -195,24 +260,41 @@ const AnimatedFeatures = () => {
           {features.map((feature, index) => (
             <div
               key={feature.name}
-              className="feature-card nexo-card-glass group cursor-pointer transform-gpu"
+              className="feature-card group relative cursor-pointer transform-gpu"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              <div className="relative mb-4">
-                <div className="feature-icon-bg absolute inset-0 flex h-10 w-10 items-center justify-center rounded-lg bg-nexo-blue/10 group-hover:bg-nexo-blue/20 transition-colors" />
-                <div className="feature-icon relative flex h-10 w-10 items-center justify-center">
-                  <feature.icon className="h-6 w-6 text-nexo-blue" aria-hidden="true" />
+              {/* Gradient border effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-nexo-blue via-nexo-teal to-nexo-magenta rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-500 group-hover:duration-200" />
+              
+              {/* Card content */}
+              <div className="relative bg-nexo-black/40 backdrop-blur-xl rounded-xl p-6 border border-white/10 h-full transition-all duration-300 group-hover:border-white/20">
+                {/* Icon container */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 flex h-14 w-14 items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-br from-nexo-blue/40 to-nexo-teal/40 rounded-xl blur-lg group-hover:blur-xl transition-all duration-300" />
+                  </div>
+                  <div className="feature-icon-bg relative flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-nexo-blue/20 to-nexo-teal/20 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                    <feature.icon className="h-7 w-7 text-white relative z-10" aria-hidden="true" />
+                  </div>
                 </div>
+                
+                {/* Text content */}
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-nexo-blue transition-colors duration-300">
+                  {feature.name}
+                </h3>
+                <p className="text-base text-gray-400 leading-relaxed">
+                  {feature.description}
+                </p>
+                
+                {/* Hover glow effect */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-nexo-blue/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {index === 0 && (
+                  <div className="absolute -top-3 -right-3 px-3 py-1.5 bg-gradient-to-r from-nexo-blue to-nexo-teal rounded-full text-xs text-white font-medium shadow-lg">
+                    New
+                  </div>
+                )}
               </div>
-              <h3 className="text-lg font-semibold text-white">{feature.name}</h3>
-              <p className="mt-2 text-base text-muted-foreground">
-                {feature.description}
-              </p>
-              {index === 0 && (
-                <div className="absolute -top-2 -right-2 px-2 py-1 bg-nexo-blue/20 rounded text-xs text-nexo-blue">
-                  New
-                </div>
-              )}
             </div>
           ))}
         </div>

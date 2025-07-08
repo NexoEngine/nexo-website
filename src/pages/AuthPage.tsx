@@ -55,7 +55,7 @@ const AuthPage = () => {
                 supabaseClient={supabase}
                 appearance={{
                   theme: ThemeSupa,
-                  extend: false,
+                  extend: true,
                   className: {
                     container: 'auth-container-custom',
                     button: 'auth-button-custom',
@@ -63,7 +63,29 @@ const AuthPage = () => {
                     label: 'auth-label-custom',
                     anchor: 'auth-anchor-custom',
                     message: 'auth-message-custom',
-                  }
+                  },
+                  style: {
+                    button: {
+                      borderRadius: '0.5rem',
+                      fontSize: '0.875rem',
+                    },
+                    anchor: {
+                      display: 'block',
+                      textAlign: 'center',
+                      marginTop: '0.5rem',
+                    },
+                    container: {
+                      width: '100%',
+                    },
+                  },
+                  variables: {
+                    default: {
+                      colors: {
+                        brand: 'hsl(var(--primary))',
+                        brandAccent: 'hsl(var(--primary))',
+                      },
+                    },
+                  },
                 }}
                 providers={['google', 'github']}
                 redirectTo={window.location.origin}
@@ -149,7 +171,7 @@ const AuthPage = () => {
             width: 100%;
             padding: 0.75rem 1rem;
             margin-top: 0.25rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             border-radius: 0.5rem;
             font-size: 0.875rem;
             line-height: 1.25rem;
@@ -172,6 +194,7 @@ const AuthPage = () => {
             font-weight: 500;
             margin-bottom: 0.25rem;
             color: hsl(var(--foreground));
+            text-align: left !important;
           }
           
           /* Link styling */
@@ -220,6 +243,97 @@ const AuthPage = () => {
             background: hsl(var(--destructive) / 0.1);
             color: hsl(var(--destructive));
             border: 1px solid hsl(var(--destructive) / 0.2);
+          }
+          
+          /* OAuth buttons container - single line */
+          .auth-container-custom > div > div:has(button[data-provider]) {
+            display: flex !important;
+            gap: 0.75rem !important;
+            margin-bottom: 1rem !important;
+          }
+          
+          /* OAuth buttons - equal width */
+          .auth-container-custom button[data-provider] {
+            flex: 1 !important;
+            margin: 0 !important;
+            width: auto !important;
+          }
+          
+          /* Auth form container */
+          .auth-container-custom form {
+            margin-top: 1rem;
+          }
+          
+          /* Form field groups for consistent spacing */
+          .auth-container-custom > div > form > div {
+            margin-bottom: 0.75rem;
+          }
+          
+          /* Last form field should have less margin */
+          .auth-container-custom > div > form > div:last-of-type {
+            margin-bottom: 0.5rem;
+          }
+          
+          /* Force all labels to be left aligned */
+          .auth-container-custom label,
+          .auth-container-custom .auth-label-custom,
+          .auth-container-custom form label {
+            text-align: left !important;
+            width: 100% !important;
+            display: block !important;
+          }
+          
+          /* Reduce space between form fields */
+          .auth-container-custom form > div > div {
+            margin-bottom: 0.5rem !important;
+          }
+          
+          /* Specific fix for password field wrapper */
+          .auth-container-custom form > div:nth-child(2) {
+            margin-top: 0 !important;
+          }
+          
+          /* Ensure form inputs have consistent spacing */
+          .auth-container-custom input[type="email"],
+          .auth-container-custom input[type="password"],
+          .auth-container-custom input[type="text"] {
+            margin-bottom: 0.5rem !important;
+          }
+          
+          /* Auth links container - multi-line */
+          .auth-container-custom > div > div:last-child {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+            margin-top: 1rem !important;
+            text-align: center !important;
+          }
+          
+          /* Individual auth links */
+          .auth-container-custom .auth-anchor-custom {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+            padding: 0.25rem 0 !important;
+            transition: color 0.2s ease !important;
+          }
+          
+          /* Divider between OAuth and form */
+          .auth-container-custom > div > div:has(.auth-anchor-custom) {
+            width: 100% !important;
+          }
+          
+          /* Responsive adjustments */
+          @media (max-width: 640px) {
+            .auth-container-custom > div > div:has(button[data-provider]) {
+              flex-direction: column !important;
+            }
+            
+            .auth-container-custom button[data-provider] {
+              width: 100% !important;
+              flex: none !important;
+            }
           }
         `}
       </style>

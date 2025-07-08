@@ -5,12 +5,52 @@ import { useParams } from 'react-router-dom';
 import { supabase } from '@/lib/supabase'; // Import Supabase client
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+// Import common languages
+import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
+import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
+import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
+import python from 'react-syntax-highlighter/dist/esm/languages/prism/python';
+import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import markdown from 'react-syntax-highlighter/dist/esm/languages/prism/markdown';
+import java from 'react-syntax-highlighter/dist/esm/languages/prism/java';
+import csharp from 'react-syntax-highlighter/dist/esm/languages/prism/csharp';
+import go from 'react-syntax-highlighter/dist/esm/languages/prism/go';
+import rust from 'react-syntax-highlighter/dist/esm/languages/prism/rust';
+import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql';
+import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
+import docker from 'react-syntax-highlighter/dist/esm/languages/prism/docker';
+import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import CommentsSection from "@/components/CommentsSection";
 import { Post } from '@/types'; // Import the Post interface
+
+// Register languages
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('typescript', typescript);
+SyntaxHighlighter.registerLanguage('jsx', jsx);
+SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('css', css);
+SyntaxHighlighter.registerLanguage('python', python);
+SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('markdown', markdown);
+SyntaxHighlighter.registerLanguage('java', java);
+SyntaxHighlighter.registerLanguage('csharp', csharp);
+SyntaxHighlighter.registerLanguage('go', go);
+SyntaxHighlighter.registerLanguage('rust', rust);
+SyntaxHighlighter.registerLanguage('sql', sql);
+SyntaxHighlighter.registerLanguage('yaml', yaml);
+SyntaxHighlighter.registerLanguage('docker', docker);
+SyntaxHighlighter.registerLanguage('html', html);
+SyntaxHighlighter.registerLanguage('xml', html);
 
 // Remove the local Post interface, as it's now imported
 /*
@@ -29,6 +69,45 @@ const BlogPostPage = () => {
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Custom components for ReactMarkdown
+  const components = {
+    pre({ children }: any) {
+      // Return children directly without any wrapper to avoid extra styling
+      return <>{children}</>;
+    },
+    code({ node, className, children, ...props }: any) {
+      const match = /language-(\w+)/.exec(className || '');
+      const inline = !match;
+      
+      if (inline) {
+        return (
+          <code className="text-nexo-blue bg-nexo-darkBlue/50 px-1.5 py-0.5 rounded text-sm" {...props}>
+            {children}
+          </code>
+        );
+      }
+
+      return (
+        <SyntaxHighlighter
+          style={vscDarkPlus}
+          language={match[1]}
+          PreTag="div"
+          customStyle={{
+            backgroundColor: 'rgba(21, 29, 60, 0.5)', // nexo-darkBlue/50
+            borderRadius: '0.5rem',
+            padding: '1.25rem',
+            fontSize: '0.875rem',
+            marginTop: '1.5rem',
+            marginBottom: '1.5rem',
+          }}
+          {...props}
+        >
+          {String(children).replace(/\n$/, '')}
+        </SyntaxHighlighter>
+      );
+    }
+  };
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -102,7 +181,10 @@ const BlogPostPage = () => {
                   <Badge key={tag} variant="secondary" className="bg-nexo-blue/20 text-nexo-blue hover:bg-nexo-blue/30">{tag}</Badge>
                 ))}
               </div>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown 
+                remarkPlugins={[remarkGfm]}
+                components={components}
+              >
                 {post.content}
               </ReactMarkdown>
             </article>

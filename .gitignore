@@ -26,3 +26,7 @@ dist-ssr
 \@memory-bank/
 
 .env
+
+.astro/
+
+.vscode/

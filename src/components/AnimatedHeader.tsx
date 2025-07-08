@@ -183,14 +183,14 @@ const AnimatedHeader = () => {
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48 bg-nexo-darkBlue border-nexo-blue/20">
-                    {isAdmin && (
+                    {/* {isAdmin && (
                       <DropdownMenuItem asChild>
                         <Link to="/blog/new" className="flex items-center cursor-pointer hover:bg-nexo-blue/10">
                           <Plus className="mr-2 h-4 w-4" />
                           New Post
                         </Link>
                       </DropdownMenuItem>
-                    )}
+                    )} */}
                     <DropdownMenuItem 
                       onClick={handleSignOut}
                       className="flex items-center cursor-pointer hover:bg-nexo-blue/10"

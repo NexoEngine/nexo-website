@@ -3,6 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-1;
+  }
+  
+  .transform-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
 @layer base {
   :root {
     --background: 220 33% 6%;

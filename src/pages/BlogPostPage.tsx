@@ -25,7 +25,7 @@ import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
 import docker from 'react-syntax-highlighter/dist/esm/languages/prism/docker';
 import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup';
-import Header from '@/components/Header';
+import AnimatedHeader from '@/components/AnimatedHeader';
 import Footer from '@/components/Footer';
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -154,7 +154,7 @@ const BlogPostPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-      <Header />
+      <AnimatedHeader />
       <main className="flex-grow py-12 sm:py-16 bg-nexo-darkBlue/10">
         <div className="nexo-container max-w-4xl mx-auto">
           {loading && (

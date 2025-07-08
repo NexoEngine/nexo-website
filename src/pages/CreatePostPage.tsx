@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
-import Header from '@/components/Header';
+import AnimatedHeader from '@/components/AnimatedHeader';
 import Footer from '@/components/Footer';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -84,7 +84,7 @@ const CreatePostPage = () => {
   if (!session) {
     return (
         <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-            <Header />
+            <AnimatedHeader />
             <main className="flex-grow flex items-center justify-center">
                 <p>Please <Link to="/auth" className="text-nexo-blue hover:underline">login</Link> to create a post.</p>
             </main>
@@ -95,7 +95,7 @@ const CreatePostPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-      <Header />
+      <AnimatedHeader />
       <main className="flex-grow py-12 sm:py-16 bg-nexo-darkBlue/10">
         <div className="nexo-container max-w-3xl mx-auto">
           <Card className="nexo-card">

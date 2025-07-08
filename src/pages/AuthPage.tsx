@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/lib/supabase';
-import Header from '@/components/Header';
+import AnimatedHeader from '@/components/AnimatedHeader';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { LogIn, Mail, Lock } from 'lucide-react';
@@ -35,7 +35,7 @@ const AuthPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <Header />
+      <AnimatedHeader />
       <main className="flex-grow flex items-center justify-center py-12 sm:py-16 bg-muted/30">
         <div className="w-full max-w-md px-4">
           <Card className="overflow-hidden shadow-lg">

@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase'; // Import Supabase client
 // import { useAuth } from '@/hooks/useAuth'; // Old Firebase auth hook
 import { useAuth } from '@/contexts/AuthContext'; // Use Supabase AuthContext
 import PostEditor from '@/components/admin/PostEditor'; // Assuming this component is generic enough
-import Header from '@/components/Header';
+import AnimatedHeader from '@/components/AnimatedHeader';
 import Footer from '@/components/Footer';
 import { toast } from "@/components/ui/use-toast";
 
@@ -78,7 +78,7 @@ const NewPostPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-      <Header />
+      <AnimatedHeader />
       <main className="flex-grow py-12 sm:py-16">
         <div className="nexo-container max-w-4xl mx-auto">
           {/* Ensure PostEditor component calls onSubmit with (formData, status) */}

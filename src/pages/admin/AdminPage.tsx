@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { db } from '@/lib/firebase';
 import { supabase } from '@/lib/supabase'; // Import Supabase client
 import { Link } from 'react-router-dom';
-import Header from '@/components/Header';
+import AnimatedHeader from '@/components/AnimatedHeader';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -90,7 +90,7 @@ const AdminPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-      <Header />
+      <AnimatedHeader />
       <main className="flex-grow py-12 sm:py-16">
         <div className="nexo-container">
           <div className="flex justify-between items-center mb-8">

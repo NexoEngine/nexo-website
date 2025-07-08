@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Link } from 'react-router-dom';
-import Header from '@/components/Header';
+import AnimatedHeader from '@/components/AnimatedHeader';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -50,7 +50,7 @@ const BlogListPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-      <Header />
+      <AnimatedHeader />
       <main className="flex-grow py-12 sm:py-16 bg-nexo-darkBlue/10">
         <div className="nexo-container">
           <h1 className="text-3xl font-bold tracking-tight text-nexo-white sm:text-4xl mb-8 text-center chrome-gradient-text">

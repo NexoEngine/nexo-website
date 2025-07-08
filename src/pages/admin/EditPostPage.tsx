@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import PostEditor from '@/components/admin/PostEditor';
-import Header from '@/components/Header';
+import AnimatedHeader from '@/components/AnimatedHeader';
 import Footer from '@/components/Footer';
 import { toast } from "@/components/ui/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -159,7 +159,7 @@ const EditPostPage = () => {
   if (authLoading || loading) {
     return (
       <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-        <Header />
+        <AnimatedHeader />
         <main className="flex-grow py-12 sm:py-16">
           <div className="nexo-container max-w-4xl mx-auto">
             <div className="space-y-6 p-6 nexo-card border-nexo-blue/30 bg-nexo-darkBlue/70">
@@ -183,7 +183,7 @@ const EditPostPage = () => {
   if (error) {
     return (
       <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-        <Header />
+        <AnimatedHeader />
         <main className="flex-grow py-12 sm:py-16">
           <div className="nexo-container max-w-4xl mx-auto">
             <div className="text-center text-red-500 bg-red-900/30 p-4 rounded-md">{error}</div>
@@ -198,7 +198,7 @@ const EditPostPage = () => {
   if (!postExists || !initialData) {
     return (
       <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-        <Header />
+        <AnimatedHeader />
         <main className="flex-grow py-12 sm:py-16">
           <div className="nexo-container max-w-4xl mx-auto">
             <p className="text-center text-muted-foreground">Post not found or could not be loaded.</p>
@@ -212,7 +212,7 @@ const EditPostPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-nexo-black text-white">
-      <Header />
+      <AnimatedHeader />
       <main className="flex-grow py-12 sm:py-16">
         <div className="nexo-container max-w-4xl mx-auto">
           <PostEditor

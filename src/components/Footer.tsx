@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Twitter, Heart } from 'lucide-react';
+import { Github, Linkedin, Heart } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,11 +23,11 @@ const Footer = () => {
 
   const socialLinks = [
     { name: 'GitHub', href: 'https://github.com/NexoEngine', icon: Github },
-    { name: 'Twitter', href: 'https://twitter.com', icon: Twitter },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/nexo-engine/posts/?feedView=all', icon: Linkedin },
   ];
 
   return (
-    <footer className="bg-nexo-black border-t border-nexo-darkBlue" aria-labelledby="footer-heading">
+    <footer className="nexo-footer-gradient border-t-2 border-white/20" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
@@ -118,7 +118,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-nexo-darkBlue flex flex-col md:flex-row items-center justify-between">
+        <div className="mt-8 pt-8 border-t border-nexo-purple/20 flex flex-col md:flex-row items-center justify-between">
           <p className="text-xs text-muted-foreground text-center md:text-left">
             &copy; {currentYear} NEXO Engine. All rights reserved. MIT License.
           </p>

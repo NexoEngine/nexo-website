@@ -2,11 +2,19 @@ import React from 'react';
 import DownloadButton from './DownloadButton';
 import { Headset, Monitor, Gamepad } from 'lucide-react';
 import VRHeadset from './VRHeadset';
+import Aurora from './Aurora';
 
 const Hero = () => {
   return (
-    <div className="relative overflow-hidden bg-nexo-black bg-chrome-radial py-16 sm:py-24 bg-[size:20px_20px] bg-chrome-grid">
-      <div className="absolute inset-0 bg-gradient-radial from-nexo-blue/10 via-transparent to-transparent" />
+    <div className="relative overflow-hidden bg-nexo-black py-16 sm:py-24">
+      <div className="absolute inset-0">
+        <Aurora
+          colorStops={["#2f0e52", "#bd35cb", "#03b4d1"]}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
       
       <div className="nexo-container relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -51,8 +59,8 @@ const Hero = () => {
           </div>
           
           <div className="relative flex justify-center lg:justify-end">
-            <div className="absolute -right-16 -top-16 w-44 h-44 bg-nexo-blue/10 rounded-full blur-3xl"></div>
-            <div className="absolute -left-16 -bottom-16 w-44 h-44 bg-nexo-blue/10 rounded-full blur-3xl"></div>
+            <div className="absolute -right-16 -top-16 w-44 h-44 bg-nexo-magenta/10 rounded-full blur-3xl"></div>
+            <div className="absolute -left-16 -bottom-16 w-44 h-44 bg-nexo-teal/10 rounded-full blur-3xl"></div>
             
             <div className="relative w-full max-w-lg">
               <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-nexo-blue/30 to-nexo-chrome/20 opacity-75 blur-xl"></div>

@@ -16,33 +16,33 @@
 
 @layer base {
   :root {
-    --background: 220 33% 6%;
+    --background: 261 63% 19%;
     --foreground: 210 40% 98%;
 
-    --card: 224 32% 8%;
+    --card: 261 63% 19%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 224 32% 8%;
+    --popover: 261 63% 19%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 223 92% 57%;
+    --primary: 206 91% 44%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 220 26% 14%;
+    --secondary: 271 56% 48%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 215 25% 12%;
-    --muted-foreground: 217 15% 65%;
+    --muted: 261 40% 25%;
+    --muted-foreground: 271 30% 70%;
 
-    --accent: 223 92% 57%;
+    --accent: 188 96% 41%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 215 25% 12%;
-    --input: 215 25% 12%;
-    --ring: 223 92% 57%;
+    --border: 271 56% 48%;
+    --input: 261 40% 25%;
+    --ring: 206 91% 44%;
 
     --radius: 0.5rem;
 
@@ -84,7 +84,7 @@
   }
 
   .nexo-btn-outline {
-    @apply nexo-btn border border-nexo-gray/30 bg-background/10 backdrop-blur-sm hover:bg-nexo-blue/10 hover:text-nexo-blue hover:border-nexo-blue/50;
+    @apply nexo-btn border border-nexo-gray/30 bg-background/10 backdrop-blur-sm hover:bg-nexo-teal/10 hover:text-nexo-teal hover:border-nexo-teal/50;
   }
 
   .nexo-gradient-text {
@@ -92,7 +92,7 @@
   }
 
   .nexo-card {
-    @apply rounded-lg border border-nexo-darkBlue/50 bg-nexo-darkBlue/50 p-6 backdrop-blur-sm transition-all hover:border-nexo-blue/30 hover:bg-nexo-darkBlue/80;
+    @apply rounded-lg border border-nexo-darkBlue/50 bg-nexo-darkBlue/50 p-6 backdrop-blur-sm transition-all hover:border-nexo-teal/30 hover:bg-nexo-darkBlue/80;
   }
   
   /* Chrome themed classes */
@@ -105,7 +105,7 @@
   .chrome-btn {
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium 
            transition-colors focus-visible:outline-none focus-visible:ring-2 
-           focus-visible:ring-nexo-blue/50 focus-visible:ring-offset-2 
+           focus-visible:ring-nexo-teal/50 focus-visible:ring-offset-2 
            disabled:opacity-50 disabled:pointer-events-none ring-offset-background
            bg-gradient-to-b from-nexo-chrome to-nexo-chromeGray hover:from-white hover:to-nexo-chrome
            text-nexo-black border border-nexo-chromeMetal/30;
@@ -116,7 +116,7 @@
   }
   
   .vr-highlight {
-    @apply bg-nexo-blue/20 backdrop-blur-sm border border-nexo-blue/30 
+    @apply bg-nexo-teal/20 backdrop-blur-sm border border-nexo-teal/30 
            rounded-lg p-2 animate-vr-pulse;
   }
   
@@ -126,5 +126,29 @@
   
   .chrome-surface {
     @apply bg-gradient-to-b from-nexo-chromeDark to-nexo-black border border-nexo-chromeGray/20;
+  }
+  
+  /* New gradient backgrounds */
+  .nexo-header-glass {
+    @apply bg-gradient-to-b from-nexo-violet/40 to-nexo-black/60 
+           backdrop-blur-xl border-b border-nexo-purple/20
+           shadow-lg shadow-nexo-purple/10;
+  }
+  
+  .nexo-section-gradient-1 {
+    @apply bg-gradient-to-br from-nexo-violet via-nexo-purple to-nexo-darkBlue;
+  }
+  
+  .nexo-section-gradient-2 {
+    @apply bg-gradient-to-tr from-nexo-purple via-nexo-magenta/20 to-nexo-violet;
+  }
+  
+  .nexo-footer-gradient {
+    @apply bg-gradient-to-b from-nexo-violet/80 to-nexo-black;
+  }
+  
+  .nexo-card-glass {
+    @apply bg-nexo-darkBlue/30 backdrop-blur-md border border-nexo-purple/20
+           hover:bg-nexo-darkBlue/40 hover:border-nexo-teal/30;
   }
 }

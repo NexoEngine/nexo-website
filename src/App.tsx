@@ -38,6 +38,7 @@ const App = () => (
 
             {/* Blog Routes */}
             <Route path="/blog" element={<BlogListPage />} />
+            <Route path="/blog/new" element={<Navigate to="/blog/create" replace />} />
             <Route path="/blog/:postId" element={<BlogPostPage />} />
             <Route 
               path="/blog/create" 

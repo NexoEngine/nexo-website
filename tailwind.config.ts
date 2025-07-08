@@ -25,15 +25,19 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				nexo: {
-					blue: '#2563ff',
-					darkBlue: '#171D2E',
-					black: '#0A0D14',
-					gray: '#8E9196',
+					blue: '#088bd8',
+					darkBlue: '#2f0e52',
+					black: '#2f0e52',
+					gray: '#7d37c6',
 					lightGray: '#F1F0FB',
-					chrome: '#E8E9EA',
-					chromeGray: '#9F9EA1',
-					chromeDark: '#333336',
-					chromeMetal: '#AAADB0',
+					chrome: '#bd35cb',
+					chromeGray: '#7d37c6',
+					chromeDark: '#2f0e52',
+					chromeMetal: '#bd35cb',
+					teal: '#03b4d1',
+					magenta: '#bd35cb',
+					purple: '#7d37c6',
+					violet: '#2f0e52',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -98,10 +102,10 @@ export default {
 				},
 				'pulse-glow': {
 					'0%, 100%': { 
-						boxShadow: '0 0 10px rgba(37, 99, 255, 0.5), 0 0 20px rgba(37, 99, 255, 0.3), 0 0 30px rgba(37, 99, 255, 0.1)' 
+						boxShadow: '0 0 10px rgba(8, 139, 216, 0.5), 0 0 20px rgba(8, 139, 216, 0.3), 0 0 30px rgba(8, 139, 216, 0.1)' 
 					},
 					'50%': { 
-						boxShadow: '0 0 15px rgba(37, 99, 255, 0.6), 0 0 30px rgba(37, 99, 255, 0.4), 0 0 45px rgba(37, 99, 255, 0.2)' 
+						boxShadow: '0 0 15px rgba(8, 139, 216, 0.6), 0 0 30px rgba(8, 139, 216, 0.4), 0 0 45px rgba(8, 139, 216, 0.2)' 
 					}
 				},
 				'float': {
@@ -122,11 +126,24 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'hero-pattern': 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%232563ff\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")',
+				'hero-pattern': 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%23088bd8\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")',
 				'chrome-grid': 'linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
 				'chrome-radial': 'radial-gradient(circle, rgba(50, 50, 56, 0.8) 0%, rgba(20, 20, 24, 1) 100%)',
+				'nexo-gradient-primary': 'linear-gradient(135deg, #2f0e52 0%, #7d37c6 100%)',
+				'nexo-gradient-secondary': 'linear-gradient(135deg, #7d37c6 0%, #03b4d1 100%)',
+				'nexo-gradient-accent': 'linear-gradient(135deg, #bd35cb 0%, #03b4d1 100%)',
+				'nexo-gradient-dark': 'linear-gradient(180deg, #2f0e52 0%, #0A0D14 100%)',
+				'nexo-gradient-radial': 'radial-gradient(circle at center, #03b4d1 0%, #2f0e52 100%)',
+				'nexo-gradient-glow': 'radial-gradient(circle at center, #bd35cb 0%, transparent 70%)',
+				'nexo-gradient-mesh': 'conic-gradient(from 180deg at 50% 50%, #2f0e52 0deg, #bd35cb 90deg, #03b4d1 180deg, #7d37c6 270deg, #2f0e52 360deg)',
+				'nexo-gradient-subtle': 'linear-gradient(180deg, rgba(47, 14, 82, 0.4) 0%, rgba(10, 13, 20, 0.8) 100%)',
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+	plugins: [
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
+		require("tailwindcss-animate"), 
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
+		require("@tailwindcss/typography")
+	],
 } satisfies Config;

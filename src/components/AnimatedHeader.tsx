@@ -117,7 +117,7 @@ const AnimatedHeader = () => {
   const avatarUrl = profile?.avatar_url;
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 w-full border-b border-nexo-darkBlue/50 bg-nexo-black/80 backdrop-blur-lg">
+    <header ref={headerRef} className="sticky top-0 z-50 w-full nexo-header-glass">
       <div className="nexo-container">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">

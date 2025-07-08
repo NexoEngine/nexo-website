@@ -11,6 +11,7 @@ import { Headset, Gamepad, Monitor, Video, Chrome } from 'lucide-react';
 import { AnimatedButton } from '@/components/animations/AnimatedButton';
 import { ScrollReveal } from '@/components/animations/ScrollReveal';
 import { PageTransition } from '@/components/animations/PageTransition';
+import Aurora from '@/components/Aurora';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,8 +68,16 @@ const Index = () => {
           <AnimatedHero />
           <AnimatedFeatures />
 
-        <section ref={vrSectionRef} className="py-16 sm:py-24 bg-chrome-radial bg-chrome-grid bg-[size:20px_20px]">
-          <div className="nexo-container">
+        <section ref={vrSectionRef} className="relative py-16 sm:py-24 bg-nexo-violet overflow-hidden border-t-2 border-white/20">
+          <div className="absolute inset-0">
+            <Aurora
+              colorStops={["#7d37c6", "#03b4d1", "#bd35cb"]}
+              blend={0.6}
+              amplitude={0.8}
+              speed={0.4}
+            />
+          </div>
+          <div className="nexo-container relative">
             <div className="mx-auto max-w-3xl">
               <div className="flex flex-col items-center space-y-8">
                 <div className="vr-highlight px-4 py-2">
@@ -120,7 +129,7 @@ const Index = () => {
           </div>
         </section>
 
-        <section ref={ctaSectionRef} className="py-16 sm:py-24 bg-nexo-black bg-hero-pattern">
+        <section ref={ctaSectionRef} className="py-16 sm:py-24 nexo-section-gradient-2 border-t-2 border-white/20">
           <div className="nexo-container">
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-3xl font-bold tracking-tight chrome-gradient-text sm:text-4xl">

@@ -176,7 +176,7 @@ const AnimatedFeatures = () => {
   }, []);
 
   return (
-    <div ref={containerRef} id="features" className="bg-nexo-darkBlue py-16 sm:py-24 relative overflow-hidden">
+    <div ref={containerRef} id="features" className="nexo-section-gradient-1 py-16 sm:py-24 relative overflow-hidden border-t-2 border-white/20">
       <div className="absolute inset-0 bg-gradient-to-b from-nexo-blue/5 to-transparent parallax-element" />
       <div className="absolute top-20 left-10 w-32 h-32 bg-nexo-blue/10 rounded-full blur-3xl parallax-element" />
       <div className="absolute bottom-20 right-10 w-40 h-40 bg-nexo-blue/10 rounded-full blur-3xl parallax-element" />
@@ -195,7 +195,7 @@ const AnimatedFeatures = () => {
           {features.map((feature, index) => (
             <div
               key={feature.name}
-              className="feature-card nexo-card group cursor-pointer transform-gpu"
+              className="feature-card nexo-card-glass group cursor-pointer transform-gpu"
               style={{ transformStyle: 'preserve-3d' }}
             >
               <div className="relative mb-4">

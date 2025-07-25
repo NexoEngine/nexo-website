@@ -1,0 +1,31 @@
+/* Custom CSS for NEXO documentation */
+:root {
+  --nexo-blue: #19a9c9;
+  --nexo-dark-blue: #001234;
+}
+
+/* Override some Catppuccin colors with NEXO brand colors */
+.dark {
+  --vp-c-brand-1: var(--nexo-blue);
+  --vp-c-brand-2: var(--nexo-blue);
+  --vp-c-brand-3: var(--nexo-blue);
+}
+
+/* Mermaid diagram styling */
+.mermaid {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  background-color: var(--vp-c-bg-soft);
+  padding: 1rem;
+}
+
+/* Code block enhancements */
+.vp-doc div[class*='language-'] {
+  border-radius: 8px;
+}
+
+/* Button hover effects */
+.vp-button:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, Linkedin, Heart } from 'lucide-react';
+import { getDocumentationUrl } from '@/lib/config';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -7,7 +8,7 @@ const Footer = () => {
   const footerNavigation = {
     engine: [
       { name: 'Features', href: '#features' },
-      { name: 'Documentation', href: 'https://github.com/NexoEngine/game-engine/wiki' },
+      { name: 'Documentation', href: getDocumentationUrl() },
       { name: 'Releases', href: 'https://github.com/NexoEngine/game-engine/releases' },
     ],
     community: [

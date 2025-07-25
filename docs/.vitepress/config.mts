@@ -7,9 +7,10 @@ export default withMermaid(
     description: "Welcome Portal Documentation",
     lang: 'en-US',
     lastUpdated: true,
+    base: '/docs/',
 
     head: [
-      ['link', { rel: 'icon', href: '/nexo-logo.png' }]
+      ['link', { rel: 'icon', href: '/docs/nexo-logo.png' }]
     ],
 
     themeConfig: {
@@ -59,7 +60,7 @@ export default withMermaid(
 
       footer: {
         message: 'Released under the MIT License.',
-        copyright: 'Copyright © 2024-present NEXO'
+        copyright: `Copyright © ${new Date().getFullYear()}-present NEXO`
       }
     },
 

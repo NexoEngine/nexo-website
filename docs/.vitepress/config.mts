@@ -28,7 +28,8 @@ export default withMermaid(
           items: [
             { text: 'What is NEXO?', link: '/' },
             { text: 'Getting Started', link: '/guide/getting-started' },
-            { text: 'Architecture', link: '/guide/architecture' }
+            { text: 'Architecture', link: '/guide/architecture' },
+            { text: 'Engine Features', link: '/guide/engine-features' }
           ]
         },
         {
@@ -49,7 +50,7 @@ export default withMermaid(
       ],
 
       socialLinks: [
-        { icon: 'github', link: 'https://github.com/nexo' }
+        { icon: 'github', link: 'https://github.com/NexoEngine/game-engine' }
       ],
 
       search: {

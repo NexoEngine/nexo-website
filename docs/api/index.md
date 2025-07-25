@@ -1,16 +1,67 @@
 # API Reference
 
-NEXO uses Supabase as its backend, providing a RESTful API and real-time subscriptions.
+NEXO provides APIs for both the game engine (C++) and the Welcome Portal (Web).
 
-## Overview
+## Engine API (C++)
 
-The API is organized around REST principles with the following base URL:
+The NEXO Engine exposes a comprehensive C++ API for game development:
+
+### Core Systems
+
+```cpp
+#include <nexo/core.h>
+
+// Initialize the engine
+Nexo::Engine engine;
+engine.Initialize();
+
+// Access core systems
+auto& coordinator = engine.GetCoordinator();
+auto& renderer = engine.GetRenderer();
+auto& physics = engine.GetPhysics();
+```
+
+### Entity Management
+
+```cpp
+// Create entities
+Entity player = coordinator.CreateEntity();
+Entity enemy = coordinator.CreateEntity();
+
+// Add components
+coordinator.AddComponent<Transform>(player, 
+    Transform{.position = {0, 0, 0}, .rotation = {0, 0, 0}, .scale = {1, 1, 1}});
+coordinator.AddComponent<RigidBody>(player, 
+    RigidBody{.mass = 75.0f, .velocity = {0, 0, 0}});
+```
+
+### Rendering API
+
+```cpp
+// Begin rendering
+renderer.BeginScene(camera);
+
+// Draw primitives
+renderer.DrawQuad({0, 0}, {100, 100}, Color::Red);
+renderer.DrawModel(model, transform, material);
+
+// End rendering
+renderer.EndScene();
+```
+
+## Portal API (REST)
+
+The Welcome Portal uses Supabase, providing a RESTful API:
+
+### Base URL
 
 ```
 https://[YOUR_PROJECT_REF].supabase.co/rest/v1/
 ```
 
-All API requests require authentication via the `Authorization` header:
+### Authentication
+
+All API requests require authentication:
 
 ```
 Authorization: Bearer YOUR_ACCESS_TOKEN

@@ -1,16 +1,77 @@
 # Getting Started
 
-Welcome to NEXO! This guide will help you get up and running with the Welcome Portal.
+Welcome to NEXO Engine! This guide covers setting up both the game engine and the Welcome Portal.
 
 ## Prerequisites
 
-Before you begin, make sure you have the following installed:
+### For NEXO Engine
 
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [Yarn](https://yarnpkg.com/) (v1.22 or higher)
-- A [Supabase](https://supabase.com/) account
+- **CMake** 3.28 or higher
+- **C++ Compiler**: GCC/Clang (Linux/macOS) or MSVC (Windows)
+- **Git** with submodule support
+- **.NET SDK 9.0** for C# scripting
+- **Dependencies**: Raylib 5.0, Boost (handled by vcpkg)
 
-## Installation
+### For Welcome Portal
+
+- **Node.js** v18 or higher
+- **Yarn** v1.22 or higher
+- **Supabase** account for backend services
+
+## NEXO Engine Installation
+
+### Windows Setup
+
+1. Install Visual Studio with C++ development tools
+2. Clone and build:
+
+```bash
+# Clone the repository
+git clone https://github.com/NexoEngine/game-engine.git
+cd game-engine
+
+# Initialize submodules
+git submodule init
+git pull --recurse-submodules
+
+# Setup vcpkg
+.\vcpkg\bootstrap-vcpkg.bat
+.\vcpkg\vcpkg integrate install
+
+# Build the engine
+cmake -B build
+cmake --build build
+```
+
+### Linux/macOS Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/NexoEngine/game-engine.git
+cd game-engine
+
+# Initialize submodules
+git submodule init
+git pull --recurse-submodules
+
+# Build with CMake preset (recommended)
+cmake --workflow --preset=build-debug
+```
+
+### Running the Engine
+
+```bash
+# Run the game engine editor
+./build/game_engine  # On Windows: build\game_engine.exe
+
+# Run the server
+./build/server      # On Windows: build\server.exe
+
+# Run the client
+./build/client      # On Windows: build\client.exe
+```
+
+## Welcome Portal Installation
 
 ### 1. Clone the Repository
 
@@ -27,13 +88,13 @@ yarn install
 
 ### 3. Environment Setup
 
-Create a `.env` file in the root directory:
+Create a `.env` file:
 
 ```bash
 cp .env.example .env
 ```
 
-Add your Supabase credentials:
+Configure your Supabase credentials:
 
 ```env
 VITE_SUPABASE_URL=your_supabase_url
@@ -42,7 +103,7 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 ### 4. Database Setup
 
-Run the following SQL in your Supabase dashboard to create the necessary tables:
+Execute in your Supabase SQL editor:
 
 ```sql
 -- Create blog posts table
@@ -70,15 +131,18 @@ ALTER TABLE blog_posts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE comments ENABLE ROW LEVEL SECURITY;
 ```
 
-## Development
-
-Start the development server:
+### 5. Start Development
 
 ```bash
+# Start the web portal
 yarn dev
+
+# Start documentation server
+yarn docs:dev
 ```
 
-The application will be available at `http://localhost:8887`.
+Portal available at: `http://localhost:8887`
+Documentation at: `http://localhost:5173`
 
 ## Project Structure
 

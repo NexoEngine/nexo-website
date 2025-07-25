@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "NEXO"
+  name: "NEXO Engine"
   text: "Welcome Portal Documentation"
-  tagline: Next-generation immersive experience platform
+  tagline: Open-source game engine for desktop and virtual reality development
   image:
     src: /nexo-logo.png
     alt: NEXO Logo
@@ -14,69 +14,94 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: View on GitHub
-      link: https://github.com/nexo
+      link: https://github.com/NexoEngine/game-engine
 
 features:
-  - icon: 🚀
-    title: Fast & Modern
-    details: Built with React, TypeScript, and Vite for blazing fast development and optimal performance
+  - icon: 🎮
+    title: Game Engine Core
+    details: Modern C++ game engine with Entity Component System (ECS) architecture for efficient game development
+  - icon: 🖥️
+    title: Integrated Editor
+    details: Built-in editor powered by ImGui for scene creation and game object management
   - icon: 🎨
-    title: Beautiful UI
-    details: Stunning design with Tailwind CSS and shadcn/ui components for a polished user experience
-  - icon: 🔐
-    title: Secure Authentication
-    details: Powered by Supabase for robust authentication and database management
-  - icon: 📝
-    title: Blog System
-    details: Full-featured blog with admin capabilities, markdown support, and syntax highlighting
-  - icon: 🌍
-    title: 3D Graphics
-    details: Immersive 3D experiences with Three.js and React Three Fiber
-  - icon: 📱
-    title: Responsive Design
-    details: Mobile-first approach ensuring perfect display across all devices
+    title: Advanced Rendering
+    details: OpenGL 4.0+ renderer with batch rendering, 2D/3D support, and shader customization
+  - icon: 🌐
+    title: Cross-Platform
+    details: Supports desktop and VR platforms with CMake build system
+  - icon: 📜
+    title: C# Scripting
+    details: Integrated .NET SDK 9.0 support for game logic scripting
+  - icon: 🚀
+    title: Welcome Portal
+    details: React-based web portal with authentication, blog system, and 3D visualization
 ---
 
 ## Quick Start
 
-Get up and running with NEXO in minutes:
+### Engine Installation
 
 ```bash
-# Clone the repository
+# Clone the game engine repository
+git clone https://github.com/NexoEngine/game-engine.git
+cd game-engine
+
+# Initialize submodules
+git submodule init
+git pull --recurse-submodules
+
+# Build with CMake
+cmake --workflow --preset=build-debug
+```
+
+### Welcome Portal Setup
+
+```bash
+# Clone the welcome portal
 git clone https://github.com/nexo/welcome-portal.git
+cd welcome-portal
 
 # Install dependencies
 yarn install
 
-# Set up environment variables
+# Configure environment
 cp .env.example .env
 
-# Start development server
+# Start development
 yarn dev
 ```
 
 ## Architecture Overview
 
-NEXO is built with modern web technologies:
+NEXO Engine combines a powerful C++ game engine with a modern web portal:
 
 ```mermaid
-graph TD
-    A[React Frontend] --> B[Vite Build Tool]
-    A --> C[TypeScript]
-    A --> D[Tailwind CSS]
-    A --> E[shadcn/ui]
-    A --> F[Three.js]
-    G[Supabase] --> H[Authentication]
-    G --> I[Database]
-    G --> J[Storage]
-    A --> G
+graph TB
+    subgraph "NEXO Engine Core"
+        A[C++ Game Engine] --> B[Entity Component System]
+        A --> C[OpenGL Renderer]
+        A --> D[Physics Engine]
+        A --> E[C# Scripting]
+        F[ImGui Editor] --> A
+    end
+    
+    subgraph "Welcome Portal"
+        G[React Frontend] --> H[Authentication]
+        G --> I[Blog System]
+        G --> J[3D Visualization]
+        H --> K[Supabase Backend]
+    end
+    
+    A --> L[Game Export]
+    L --> G
 ```
 
-## Why NEXO?
+## Why NEXO Engine?
 
-NEXO provides a complete solution for building immersive web experiences with:
+NEXO Engine is an innovative game development platform created by five EPITECH Strasbourg students:
 
-- **Developer Experience**: Hot module replacement, TypeScript support, and modern tooling
-- **Performance**: Optimized builds with code splitting and lazy loading
-- **Scalability**: Modular architecture that grows with your needs
-- **Security**: Built-in authentication and security best practices
+- **Modern Architecture**: Entity Component System for flexible game development
+- **Integrated Tools**: Built-in editor with scene management and object creation
+- **Cross-Platform**: Desktop and VR support with optimized rendering
+- **Open Source**: MIT licensed with active community development
+- **Web Integration**: Welcome Portal for showcasing and distributing games

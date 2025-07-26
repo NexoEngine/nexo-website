@@ -52,8 +52,60 @@ function setupFullscreenHandlers() {
         // In fullscreen - enable interactivity
         container.classList.add('fullscreen')
       } else {
-        // Not in fullscreen - disable interactivity
+        // Not in fullscreen - disable interactivity and reset view
         container.classList.remove('fullscreen')
+        resetDiagramView(container)
+      }
+    })
+  }
+
+  // Function to reset diagram view to original state
+  const resetDiagramView = (container: Element) => {
+    // Find the SVG element within the container
+    const svg = container.querySelector('svg')
+    if (!svg) return
+
+    // Reset SVG transformations
+    const svgGroup = svg.querySelector('g')
+    if (svgGroup) {
+      // Remove transform attribute
+      svgGroup.removeAttribute('transform')
+      
+      // Reset any inline styles that might affect positioning
+      svgGroup.style.transform = ''
+      svgGroup.style.transition = ''
+    }
+
+    // Reset SVG viewBox to original if it was modified
+    const originalViewBox = svg.getAttribute('data-original-viewbox')
+    if (originalViewBox) {
+      svg.setAttribute('viewBox', originalViewBox)
+    }
+
+    // Clear any inline styles on the SVG that might have been added
+    svg.style.transform = ''
+    svg.style.cursor = ''
+    
+    // Reset container styles that might have been modified
+    const innerContainer = container.querySelector('.mermaid-svg-container, .mermaid')
+    if (innerContainer instanceof HTMLElement) {
+      innerContainer.style.transform = ''
+      innerContainer.style.transformOrigin = ''
+    }
+
+    // Force a reflow to ensure changes are applied
+    void container.offsetHeight
+  }
+
+  // Store original viewBox values when diagrams are first rendered
+  const storeOriginalViewBox = () => {
+    const svgs = document.querySelectorAll('.mermaid-container svg, div[id^="mermaid-"] svg')
+    svgs.forEach(svg => {
+      if (!svg.hasAttribute('data-original-viewbox')) {
+        const viewBox = svg.getAttribute('viewBox')
+        if (viewBox) {
+          svg.setAttribute('data-original-viewbox', viewBox)
+        }
       }
     })
   }
@@ -63,6 +115,9 @@ function setupFullscreenHandlers() {
   document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
   document.addEventListener('mozfullscreenchange', handleFullscreenChange)
   document.addEventListener('MSFullscreenChange', handleFullscreenChange)
+
+  // Store original viewBox values after a short delay to ensure SVGs are rendered
+  setTimeout(storeOriginalViewBox, 500)
 
   // Also listen for clicks on fullscreen buttons to ensure immediate response
   nextTick(() => {

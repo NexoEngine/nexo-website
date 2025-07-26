@@ -7,7 +7,7 @@ export const getDocumentationUrl = () => {
   }
   
   // In production, use the production domain
-  return 'https://www.nexo-engine.com/docs';
+  return 'https://docs.nexo-engine.com';
 };
 
 export const config = {

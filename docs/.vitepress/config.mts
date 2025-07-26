@@ -5,10 +5,10 @@ export default defineConfig({
   description: "Welcome Portal Documentation",
   lang: 'en-US',
   lastUpdated: true,
-  base: '/docs/',
+  base: '/',
 
   head: [
-    ['link', { rel: 'icon', href: '/docs/nexo-logo.png' }]
+    ['link', { rel: 'icon', href: '/nexo-logo.png' }]
   ],
 
   themeConfig: {

@@ -13,6 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getDocumentationUrl } from '@/lib/config';
 
 const AnimatedHeader = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,7 +28,7 @@ const AnimatedHeader = () => {
   const navigation = [
     { name: 'Features', href: '#features' },
     { name: 'Blog', href: '/blog', isLink: true },
-    { name: 'Documentation', href: 'https://github.com/NexoEngine/game-engine/wiki' },
+    { name: 'Documentation', href: getDocumentationUrl() },
     { name: 'Community', href: 'https://github.com/NexoEngine/game-engine/discussions' },
     { name: 'GitHub', href: 'https://github.com/NexoEngine/game-engine', icon: Github },
   ];

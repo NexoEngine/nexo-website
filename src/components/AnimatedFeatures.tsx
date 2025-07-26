@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Layers, Zap, Code, Gamepad2, Palette, Globe } from 'lucide-react';
 import { AnimatedButton } from './animations/AnimatedButton';
+import { getDocumentationUrl } from '@/lib/config';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -302,7 +303,7 @@ const AnimatedFeatures = () => {
         <div className="mt-16 text-center">
           <AnimatedButton variant="outline" size="lg" magneticStrength={0.3}>
             <a
-              href="https://github.com/NexoEngine/game-engine/wiki"
+              href={getDocumentationUrl()}
               target="_blank"
               rel="noopener noreferrer"
             >

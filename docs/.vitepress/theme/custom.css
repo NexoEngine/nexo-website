@@ -1,0 +1,106 @@
+/* Custom CSS for NEXO documentation */
+:root {
+  --nexo-blue: #19a9c9;
+  --nexo-dark-blue: #001234;
+}
+
+/* Override some Catppuccin colors with NEXO brand colors */
+.dark {
+  --vp-c-brand-1: var(--nexo-blue);
+  --vp-c-brand-2: var(--nexo-blue);
+  --vp-c-brand-3: var(--nexo-blue);
+}
+
+/* Code block enhancements */
+.vp-doc div[class*='language-'] {
+  border-radius: 8px;
+}
+
+/* Button hover effects */
+.vp-button:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Disable Mermaid diagram interactivity (except in fullscreen) */
+.mermaid-container:not(.fullscreen) svg,
+.vp-doc .mermaid:not(.fullscreen) svg,
+div[id^="mermaid-"]:not(.fullscreen) svg {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Ensure the container also doesn't allow interactions (except in fullscreen) */
+.mermaid-container:not(.fullscreen),
+.vp-doc .mermaid:not(.fullscreen),
+div[id^="mermaid-"]:not(.fullscreen) {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  overflow: hidden !important;
+  cursor: default !important;
+}
+
+/* Enable interactivity when in fullscreen mode */
+.mermaid-container.fullscreen,
+.mermaid-container.fullscreen svg,
+.vp-doc .mermaid.fullscreen,
+.vp-doc .mermaid.fullscreen svg,
+div[id^="mermaid-"].fullscreen,
+div[id^="mermaid-"].fullscreen svg,
+:fullscreen .mermaid-container,
+:fullscreen .mermaid-container svg,
+:fullscreen div[id^="mermaid-"],
+:fullscreen div[id^="mermaid-"] svg {
+  pointer-events: auto !important;
+  user-select: auto !important;
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  overflow: auto !important;
+  cursor: grab !important;
+}
+
+/* Change cursor when dragging in fullscreen */
+:fullscreen .mermaid-container:active,
+:fullscreen div[id^="mermaid-"]:active,
+.mermaid-container.fullscreen:active,
+div[id^="mermaid-"].fullscreen:active {
+  cursor: grabbing !important;
+}
+
+/* Re-enable pointer events for the parent container to allow scrolling */
+.vp-doc {
+  pointer-events: auto !important;
+}
+
+/* Optional: Add visual indicator that diagrams are non-interactive */
+.mermaid-container:hover,
+.vp-doc .mermaid:hover,
+div[id^="mermaid-"]:hover {
+  cursor: default !important;
+}
+
+/* Hide specific Mermaid control buttons - keep only fullscreen */
+.desktop-controls button[title="Zoom In"],
+.desktop-controls button[title="Zoom Out"],
+.desktop-controls button[title="Reset View"],
+.desktop-controls button[title="Copy Code"],
+.desktop-controls .zoom-level {
+  display: none !important;
+}
+
+/* Ensure fullscreen button remains visible */
+.desktop-controls button[title="Toggle Fullscreen"] {
+  display: inline-flex !important;
+}
+
+/* Clean up controls container spacing */
+.desktop-controls.controls {
+  gap: 0 !important;
+}

@@ -2,8 +2,8 @@
 layout: home
 
 hero:
-  name: "NEXO Engine"
-  text: "Welcome Portal Documentation"
+  name: NEXO Engine
+  text: Welcome Portal Documentation
   tagline: Open-source game engine for desktop and virtual reality development
   image:
     src: /nexo-logo.png

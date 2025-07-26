@@ -11,14 +11,6 @@
   --vp-c-brand-3: var(--nexo-blue);
 }
 
-/* Mermaid diagram styling */
-.mermaid {
-  margin: 1.5rem 0;
-  border-radius: 8px;
-  background-color: var(--vp-c-bg-soft);
-  padding: 1rem;
-}
-
 /* Code block enhancements */
 .vp-doc div[class*='language-'] {
   border-radius: 8px;
